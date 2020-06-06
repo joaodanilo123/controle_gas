@@ -1,19 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const {
-    listarBotijao,
-    atualizarBotijao,
-    gerarRelatorio,
-    listarRelatorio,
-    carregarRelatorio } = require('./crud/crud');
 
-const formatDate = require('./utils/formatDate');
+const Canister = require('./Models/Canister')();
 
-router.get('/botijoes', async (req, res) => {
-    res.json(await listarBotijao())
-})
+router.get('/canister/:type', Canister.listSingle);
+router.put('/canister/:type', Canister.update);
 
-router.put('/botijoes', atualizarBotijao);
+/*outer.put('/botijoes', atualizarBotijao);
 
 router.get('/relatorios', async (req, res) => {
     
@@ -34,6 +27,6 @@ router.post('/relatorio', async (req, res) => {
 
 router.get('/teste', (req, res)=>{
     res.send('Conseguiu mandar')
-})
+})*/
 
 module.exports = router;
