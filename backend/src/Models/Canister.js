@@ -18,22 +18,22 @@ function Canister() {
             canister_update=datetime('now', 'localtime') 
             WHERE canister_type=?
         `, params, ()=>{
-            console.log(`Botijões ${type} atualiazados.`);
-            res.end()
+            console.log(`Botijões ${type} atualizados.`);
+            return res.json(params);
         });
 
     }
 
-    async function listSingle(req, res) {
+    async function show(req, res) {
         const { type } = req.params;
         Database.get(`SELECT * FROM canister WHERE canister_type=?`, type , (err, row) => {
             row.canister_update = formatDate(row.canister_update);
-            res.json(row);
+            return res.json(row);
         });    
     }
     return {
         update,
-        listSingle,
+        show,
     }
 }
 
